@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import ResponsiveAppBar from "./components/Layout/ResponsiveAppBar";
+import { Layout } from "./components/Layout/Layout";
 import routes from "./components/routes/routes";
 
 function App() {
@@ -18,9 +18,9 @@ function App() {
   return (
     <div>
       <Router>
-        <ResponsiveAppBar>
+        <Layout>
           <Routes>{routesMap()}</Routes>
-        </ResponsiveAppBar>
+        </Layout>
       </Router>
     </div>
   );
