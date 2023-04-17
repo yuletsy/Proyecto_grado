@@ -5,11 +5,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import logo from '../../assets/images/logo.png';
+import { useNavigate } from 'react-router-dom';
 
 const pages = ['Inicio', 'Diagnostico'];
 
 function ResponsiveAppBar() {
-
+const navigate = useNavigate();
   return (
     <AppBar position="fixed" sx={{ bgcolor: "white" }}>
       <Container maxWidth="xl">
@@ -31,7 +32,7 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Button variant='contained' sx={{backgroundColor:'#fb5a73', borderRadius:'18px', '&:hover':{backgroundColor:'#fb7a8f'}}}>
+            <Button onClick={() => navigate('/login')} variant='contained' sx={{backgroundColor:'#fb5a73', borderRadius:'18px', '&:hover':{backgroundColor:'#fb7a8f'}}}>
               Ingresar
             </Button>
           </Box>
