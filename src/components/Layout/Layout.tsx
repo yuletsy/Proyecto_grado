@@ -10,7 +10,7 @@ export const Layout = (props:{children?:React.ReactNode}) => {
     <Box><ResponsiveAppBar/></Box>
     <Box component='main' sx={{flexGrow:1, pt:"2%"}}>{props.children}</Box>
     </Box>
-    <Box >
+    <Box sx={{display: "flex"}} >
     <Footer/>
     </Box>
     </React.Fragment>

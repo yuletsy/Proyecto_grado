@@ -15,10 +15,11 @@ function Footer() {
     <Box
       sx={{
         width: "100%",
-        height: "200px",
         paddingTop: "1rem",
         display: "flex",
         bgcolor: "#69a2b0",
+        pb:"2%"
+        
       }}
     >
       <Container maxWidth="xl">

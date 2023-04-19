@@ -1,18 +1,23 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import image_logistic from "../assets/images/logistica.jpg";
-import Card from "../components/Card";
+import ContainerCard from "../components/Card";
 
 export const Home = () => {
   return (
-    <Box sx={{flexDirection:"column", display: "flex", height: "100vh", width: "100%" }}>
+    <Box
+      sx={{
+        flexDirection: "column",
+        display: "flex",
+        width: "100%",
+      }}
+    >
       <Box
         sx={{
           display: "flex",
           backgroundColor: "#ffeddf",
           height: "100vh",
           width: "100%",
-          
         }}
       >
         <Box
@@ -114,7 +119,6 @@ export const Home = () => {
             width: "60%",
             justifyContent: "center",
             alignItems: "center",
-          
           }}
         >
           <img
@@ -126,7 +130,8 @@ export const Home = () => {
           />
         </Box>
       </Box>
-      <Box sx={{bgcolor:"blue"}}>
+      <Box sx={{ bgcolor: "#f7fbff" , pt:"6%"}}>
+          <ContainerCard />
       </Box>
     </Box>
   );
