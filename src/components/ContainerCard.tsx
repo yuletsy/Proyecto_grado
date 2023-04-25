@@ -20,8 +20,8 @@ function ContainerCard() {
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
-        pt: "5%",
-        pb: "4%",
+        pt: "8%",
+        pb: "6%",
         flexDirection: "column",
         height: "100vh",
       }}
@@ -38,7 +38,7 @@ function ContainerCard() {
         <Typography
           sx={{
             fontFamily: "sans-serif",
-            fontSize: 22,
+            fontSize: 25,
             fontWeight: "bolder",
           }}
         >
@@ -47,7 +47,7 @@ function ContainerCard() {
         <Typography
           sx={{
             fontFamily: "sans-serif",
-            fontSize: 22,
+            fontSize: 25,
             fontWeight: "bolder",
             pb: "1.5%",
           }}
@@ -58,7 +58,7 @@ function ContainerCard() {
         <Typography
           sx={{
             fontFamily: "unset",
-            fontSize: 17,
+            fontSize: 18,
           }}
         >
           Recibe asesorías para diferentes áreas de tu empresa, microempresa o
@@ -130,6 +130,8 @@ function ContainerCard() {
                 display: "flex",
                 maxWidth: 700,
                 flexDirection: "column",
+                  fontFamily: "unset",
+                  fontSize: 17,
               }}
             >
               <List component="ol" color="text.secondary" sx={{ pl: "3%" }}>
