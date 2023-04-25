@@ -3,6 +3,7 @@ import React from "react";
 import image_logistic from "../assets/images/logistica.jpg";
 import CardEtapas from "../components/CardEtapas";
 import ContainerCard from "../components/ContainerCard";
+import InfoFooter from "../components/InfoFooter";
 
 export const Home = () => {
   return (
@@ -136,6 +137,9 @@ export const Home = () => {
       </Box>
       <Box sx={{ bgcolor: "#white" , pt:"6"}}>
           <CardEtapas />
+      </Box>
+      <Box sx={{ bgcolor: "#f7fbff" , pt:"2%"}}>
+      <InfoFooter/>
       </Box>
     </Box>
   );
