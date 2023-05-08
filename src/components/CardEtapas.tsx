@@ -113,9 +113,8 @@ function CardEtapas() {
               <Box
                 sx={{
                   display: "flex",
-                  alignItems: "center",
                   gap: "50px",
-                  pb: "2%",
+                  pb: "2%"
                 }}
               >
                 <Box sx={{ flexDirection: "row" }}>

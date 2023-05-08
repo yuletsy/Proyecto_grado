@@ -135,7 +135,7 @@ export const Home = () => {
       <Box sx={{ bgcolor: "#f7fbff" , pt:"6%"}}>
           <ContainerCard />
       </Box>
-      <Box sx={{ bgcolor: "#white" , pt:"6"}}>
+      <Box sx={{ bgcolor: "#white" , pt:"6%"}}>
           <CardEtapas />
       </Box>
       <Box sx={{ bgcolor: "#f7fbff" , pt:"2%"}}>
