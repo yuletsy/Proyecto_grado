@@ -9,12 +9,44 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { useAppDispatch } from "../app/store/hooks";
 import { useNavigate } from "react-router-dom";
 import ImageLogisticBg from "../assets/images/logistic_bg.jpg";
+import { RegisterUserInterface } from "../interfaces/RegisterUserInterface";
+import { authRegister } from "../app/actions/RegisterAction";
+import useForm from "../hooks/useForm/useForm";
 
 export const Register = () => {
-const navigate = useNavigate();
-  
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [isDisabled, setDisabled] = React.useState(false);
+  const initialState: RegisterUserInterface = {
+    nombre: "",
+    contactoPrincipal: "",
+    telefono: "",
+    email: "",
+    contraseA: "",
+    rol: 2,
+  };
+
+  const sendRegisterInfo = () => {
+    console.log(values);
+    dispatch(authRegister(values)).then((res:any)=>{
+      console.log(res)
+    if(res.message === "Cuenta creada exitosamente."){
+      navigate("/Login")
+      navigate(0);
+    }
+    });
+    saveSubmitForm(false);
+  };
+  const handleChangeChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDisabled(event.target.checked);
+  };
+  const { handleChange, handleSubmit, values, saveSubmitForm } = useForm(
+    initialState,
+    sendRegisterInfo
+  );
   return (
     <Box
       component="form"
@@ -22,7 +54,7 @@ const navigate = useNavigate();
       sx={{
         width: "100%",
         display: "flex",
-        bgcolor:"red"
+        bgcolor: "red",
       }}
     >
       <Box
@@ -33,9 +65,8 @@ const navigate = useNavigate();
           flexDirection: "column",
           alignItems: "center",
           backgroundImage: `url(${ImageLogisticBg})`,
-          backgroundSize: 'cover',
-          height:"100%",
-          
+          backgroundSize: "cover",
+          height: "100%",
         }}
       >
         <Box
@@ -47,7 +78,6 @@ const navigate = useNavigate();
             backgroundColor: "white",
             flexDirection: "column",
             alignItems: "center",
-            
           }}
         >
           <Box sx={{}}>
@@ -83,15 +113,21 @@ const navigate = useNavigate();
               sx={{ width: "100%", pb: "3%" }}
               id="outlined-name-input"
               label="Nombre de tu empresa"
-              type="name"
+              type="text"
               autoComplete="current-name"
+              onChange={handleChange}
+              value={values.nombre}
+              name="nombre"
             />
             <TextField
               sx={{ width: "100%", pb: "3%" }}
               id="outlined-name-input"
               label="Tu nombre"
-              type="name"
+              type="text"
               autoComplete="current-name"
+              onChange={handleChange}
+              value={values.contactoPrincipal}
+              name="contactoPrincipal"
             />
             <TextField
               sx={{ width: "100%", pb: "3%" }}
@@ -99,44 +135,45 @@ const navigate = useNavigate();
               label="Tu teléfono de contacto"
               type="name"
               autoComplete="current-name"
+              onChange={handleChange}
+              value={values.telefono}
+              name="telefono"
             />
             <TextField
               sx={{ width: "100%", pb: "3%" }}
               id="outlined-email-input"
               label="Tu correo electrónico"
-              type="name"
+              type="text"
               autoComplete="current-email"
               required
+              onChange={handleChange}
+              value={values.email}
+              name="email"
             />
             <TextField
               sx={{ width: "100%", pb: "3%" }}
               id="outlined-password-input"
               label="Tu contraseña"
-              type="name"
+              type="password"
               autoComplete="current-password"
               required
+              onChange={handleChange}
+              value={values.contraseA}
+              name="contraseA"
             />
           </Box>
           <Box sx={{ alignItems: "center" }}>
-            <FormGroup sx={{ flexDirection: "row", justifyContent: "center" }}>
-              <FormControlLabel
-                sx={{ fontFamily: "unset", fontSize: 17 }}
-                control={<Checkbox />}
-                label="   He leído y Acepto los"
-              />
-              <Link
-                sx={{ pt: "3%", color: "black" }}
-                href="#"
-                underline="always"
-              >
-                Terminos y condiciones
-              </Link>
-            </FormGroup>
+            <Checkbox
+              checked={isDisabled}
+              onChange={handleChangeChecked}
+              inputProps={{ "aria-label": "controlled" }}
+            />
           </Box>
 
           <Box sx={{ p: "2%" }}>
             <Button
-              onClick={() => navigate('/Register')}
+              disabled={!isDisabled}
+              onClick={handleSubmit}
               variant="contained"
               sx={{
                 backgroundColor: "#fb5a73",
@@ -159,7 +196,7 @@ const navigate = useNavigate();
             >
               ¿Ya tienes cuenta?{" "}
               <Link
-                sx={{ pt: "1%", color: "black" ,  fontWeight: "bold"}}
+                sx={{ pt: "1%", color: "black", fontWeight: "bold" }}
                 href="/login"
                 underline="always"
               >

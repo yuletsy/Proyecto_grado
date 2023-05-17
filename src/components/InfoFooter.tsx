@@ -1,4 +1,5 @@
 import {
+  Button,
   Checkbox,
   FormControlLabel,
   FormGroup,
@@ -7,12 +8,16 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 function InfoFooter() {
+const navigate = useNavigate();
+  
   return (
     <Box
       component="form"
       autoComplete="off"
       sx={{
+        height: "100vh",
 
         width: "100%",
         display: "flex",
@@ -80,32 +85,50 @@ function InfoFooter() {
               autoComplete="current-password"
             />
           </Box>
-          <Box>
+          <Box >
             <Typography
               sx={{
                 fontFamily: "unset",
                 fontSize: 17,
                 flexDirection: "row",
+                
               }}
             >
               Selecciona las áreas de consultoría de tu interés
             </Typography>
           </Box>
-          <Box
-            sx={{ display: "flex", flexDirection: "row", gap: "90px", p: "2%" }}
-          >
+          <Box sx={{display:"flex", flexDirection:"row",gap:"90px", p:"2%"}}>
+          
             <FormGroup>
               <FormControlLabel control={<Checkbox />} label="Producción" />
               <FormControlLabel control={<Checkbox />} label="Inventarios" />
             </FormGroup>
             <FormGroup>
               <FormControlLabel control={<Checkbox />} label="Transporte" />
-              <FormControlLabel control={<Checkbox />} label="Compras y ventas"/>
+              <FormControlLabel
+                control={<Checkbox />}
+                label="Compras y ventas"
+              />
             </FormGroup>
+          </Box>
+          <Box sx={{ p: "2%" }}>
+            <Button
+              onClick={() => navigate('/')}
+              variant="contained"
+              sx={{
+                backgroundColor: "#fb5a73",
+                borderRadius: "18px",
+                "&:hover": { backgroundColor: "#fb7a8f" },
+                fontFamily: "sans-serif",
+                fontWeight: "bold",
+              }}
+            >
+              Enviar mis datos
+            </Button>
+          </Box>
           </Box>
         </Box>
       </Box>
-    </Box>
   );
 }
 export default InfoFooter;
