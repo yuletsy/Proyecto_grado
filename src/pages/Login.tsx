@@ -1,15 +1,45 @@
-import { Box, Button, Link, TextField, Typography } from '@mui/material'
-import React from 'react'
+import { Box, Button, Link, TextField, Typography } from "@mui/material";
+import React from "react";
+import { useAppDispatch } from "../app/store/hooks";
 import ImageLogisticBg from "../assets/images/logistic_bg.jpg";
+import useForm from "../hooks/useForm/useForm";
+import { LoginUserInterface } from "../interfaces/LoginUserInterface";
+import { authUser } from "../app/actions/AuthAction";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate()
+  const initialState: LoginUserInterface = {
+    email: "",
+    contraseña: "",
+  };
+
+  const sendAuthInfo = () => {
+    dispatch(authUser(values)).then((res:any)=> {
+      console.log(res)
+      if(res.message === "Ok"){
+        navigate("/MiCuenta")
+        navigate(0);
+      }
+    });
+    
+
+    saveSubmitForm(false);
+  };
+
+  const { handleChange, handleSubmit, values, saveSubmitForm } = useForm(
+    initialState,
+    sendAuthInfo
+  );
+
   return (
     <Box
       component="form"
       autoComplete="off"
       sx={{
-        height:"100vh",
-        
+        height: "100vh",
+
         width: "100%",
         display: "flex",
       }}
@@ -22,7 +52,6 @@ export const Login = () => {
           flexDirection: "column",
           alignItems: "center",
           backgroundImage: `url(${ImageLogisticBg})`,
-          
         }}
       >
         <Box
@@ -69,24 +98,30 @@ export const Login = () => {
               sx={{ width: "100%", pb: "3%" }}
               id="outlined-email-input"
               label="Tu correo electrónico"
-              type="name"
+              type="text"
               autoComplete="current-email"
               required
+              onChange={handleChange}
+              value={values.email}
+              name="email"
             />
             <TextField
               sx={{ width: "100%", pb: "3%" }}
               id="outlined-password-input"
               label="Tu contraseña"
-              type="name"
+              type="password"
               autoComplete="current-password"
               required
+              onChange={handleChange}
+              value={values.contraseña}
+              name="contraseña"
             />
           </Box>
-          
 
           <Box sx={{ p: "2%" }}>
             <Button
               variant="contained"
+              onClick={handleSubmit}
               sx={{
                 backgroundColor: "#fb5a73",
                 borderRadius: "18px",
@@ -104,12 +139,11 @@ export const Login = () => {
                 fontFamily: "unset",
                 fontSize: 17,
                 flexDirection: "row",
-                
               }}
             >
               ¿No tienes cuenta?{" "}
               <Link
-                sx={{ pt: "1%", color: "black",fontWeight:"bold" }}
+                sx={{ pt: "1%", color: "black", fontWeight: "bold" }}
                 href="/Register"
                 underline="always"
               >
@@ -120,5 +154,5 @@ export const Login = () => {
         </Box>
       </Box>
     </Box>
-  )
-}
+  );
+};

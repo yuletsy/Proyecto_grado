@@ -20,10 +20,8 @@ function ContainerCard() {
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
-        pt: "8%",
-        pb: "6%",
+        pt: "4%",
         flexDirection: "column",
-        height: "100vh",
       }}
     >
       <Box
