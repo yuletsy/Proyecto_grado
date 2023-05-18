@@ -15,10 +15,8 @@ function CardEtapas() {
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
-        pt: "8%",
-        pb: "16%",
         flexDirection: "column",
-        height: "100vh",
+        pt:"4%"
       }}
     >
       <Box
@@ -28,7 +26,7 @@ function CardEtapas() {
           width: "90%",
           justifyContent: "center",
           alignItems: "center",
-          pb: "2%",
+          pb:"2%"
         }}
       >
         <Typography
@@ -113,9 +111,8 @@ function CardEtapas() {
               <Box
                 sx={{
                   display: "flex",
-                  alignItems: "center",
                   gap: "50px",
-                  pb: "2%",
+                  pb: "2%"
                 }}
               >
                 <Box sx={{ flexDirection: "row" }}>
