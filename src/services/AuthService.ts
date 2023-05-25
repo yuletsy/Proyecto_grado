@@ -9,7 +9,7 @@ export class AuthService {
 
   async loginAuth(body: any) {
     const response = await this.http.post(
-      `${this.API_Consultorio}/api/auth`,
+      `${this.API_Consultorio}/api/auth/`,
       {
         headers: {
           Accept: "aplication/json",
