@@ -4,12 +4,15 @@ export class AuthService {
   private API_Consultorio;
 
   constructor(private http: HttpClient) {
-    this.API_Consultorio = 'http://192.168.51.107:3030';
+  this.API_Consultorio = 'https://consultoriounac.azurewebsites.net';
+  // this.API_Consultorio = 'http://192.168.51.107:3030';
+  
+  
   }
 
   async loginAuth(body: any) {
     const response = await this.http.post(
-      `${this.API_Consultorio}/api/auth/`,
+      `${this.API_Consultorio}/api/auth`,
       {
         headers: {
           Accept: "aplication/json",
