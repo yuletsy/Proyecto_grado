@@ -1,9 +1,10 @@
 import { Home } from "../../pages/Home";
 import { Login} from "../../pages/Login";
-import { MiCuenta } from "../../pages/MiCuenta";
+import { MyAccount } from "../../pages/MyAccount";
 import { PrivatePage } from "../../pages/PrivatePage";
 import {Register} from "../../pages/Register";
-
+import {Questions} from "../../pages/QuestionPage";
+import {Results} from "../../pages/ResultsPage";
 
 const routes = [
   {
@@ -22,15 +23,25 @@ const routes = [
     isPrivated:false
   },
   {
-    path: "/MiCuenta",
-    component: MiCuenta,
+    path: "/MyAccount",
+    component: MyAccount,
     isPrivated:true
   },
   {
     path:"/private",
     component: PrivatePage,
     isPrivated:true
-  }
+  },
+  {
+    path: "/Question",
+    component: Questions,
+    isPrivated: false
+  },
+  {
+    path: "/Results",
+    component: Results,
+    isPrivated: false
+  },
   
 ];
 

@@ -8,9 +8,13 @@ import SmartDisplayRoundedIcon from "@mui/icons-material/SmartDisplayRounded";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import Divider from "@mui/material/Divider";
 import TwitterIcon from '@mui/icons-material/Twitter';
-const pages = ["Inicio", "Diagnostico", "Ingresa a tu cuenta"];
+import { useNavigate } from "react-router-dom";
+
+// const pages = ["Inicio", "Diagnostico", "Ingresa a tu cuenta"];
+const pages = [{name:"Inicio", path:"/"}, {name:"Registrate", path:"/Register"}, {name:"Inicia Sesión", path:"/Login"}];
 
 function Footer() {
+  const navigate =  useNavigate();
   return (
     <Box
       sx={{
@@ -18,8 +22,8 @@ function Footer() {
         paddingTop: "1rem",
         display: "flex",
         bgcolor: "#69a2b0",
-        pb:"2%"
-        
+        pb:"2%",
+        bottom: 0,
       }}
     >
       <Container maxWidth="xl">
@@ -36,7 +40,8 @@ function Footer() {
           >
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.name}
+                onClick={()=>navigate(page.path)}
                 sx={{
                   my: 2,
                   color: "white",
@@ -48,7 +53,7 @@ function Footer() {
                   },
                 }}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>

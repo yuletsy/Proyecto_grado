@@ -23,6 +23,6 @@ export const isLoginActive = ()=>{
 }
 
 export const logOut =(refresh:any)=>{
-  refresh(0)
+  refresh("/")
   return localStorage.removeItem('token');
 }
