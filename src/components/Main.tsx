@@ -1,8 +1,9 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import image_logistic from "../assets/images/logistica.jpg";
-
+import { useNavigate } from "react-router-dom";
 function Main() {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -94,6 +95,7 @@ function Main() {
         <Box sx={{ width: "100%", pt: "10%" }}>
           <Button
             variant="contained"
+            onClick={() => navigate("/Register")}
             sx={{
               backgroundColor: "#fb5a73",
               borderRadius: "18px",

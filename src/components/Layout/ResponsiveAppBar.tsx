@@ -8,7 +8,11 @@ import logo from "../../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
 import { isLoginActive, logOut } from "../../middleware/auth";
 
-const pages = [{name:"Inicio", path:"/"},{name:"Diagnostico", path:"/Diagnostico"} ];
+const pages = [
+  { name: "Inicio", path: "/" },
+  { name: "Preguntas", path: "/Question" },
+  {name : "Resultados", path: "/Results"}
+];
 
 function ResponsiveAppBar() {
   const navigate = useNavigate();
@@ -28,12 +32,12 @@ function ResponsiveAppBar() {
               justifyContent: "center",
               gap: "4rem",
             }}
-          >{
-            isLoginActive() &&(
+          >
+            {isLoginActive() &&
               pages.map((page) => (
                 <Button
                   key={page.name}
-                  onClick={()=>navigate(page.path)}
+                  onClick={() => navigate(page.path)}
                   sx={{
                     my: 2,
                     color: "#6F6F6F",
@@ -47,18 +51,15 @@ function ResponsiveAppBar() {
                 >
                   {page.name}
                 </Button>
-              ))
-            ) 
-          }
+              ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 , display:"flex"}}>
+          <Box sx={{ flexGrow: 0, display: "flex" }}>
             {isLoginActive() ? (
               <Button
                 onClick={() => logOut(navigate)}
                 variant="contained"
                 sx={{
-                  
                   lineHeight: 1.5,
                   lineWidth: 1.5,
                   fontSize: 12,
