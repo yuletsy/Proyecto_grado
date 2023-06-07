@@ -11,7 +11,7 @@ import { isLoginActive, logOut } from "../../middleware/auth";
 const pages = [
   { name: "Inicio", path: "/" },
   { name: "Preguntas", path: "/Question" },
-  {name : "Resultados", path: "/Results"}
+  // {name : "Resultados", path: "/Results"}
 ];
 
 function ResponsiveAppBar() {
