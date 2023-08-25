@@ -8,7 +8,7 @@ export class QuestionService {
         this.API_Consultorio = 'https://consultoriounac.azurewebsites.net';
     }
     
-    async QuestionAuth (){
+    async getQuestionList (){
         const response = await this.http.get(
             `${this.API_Consultorio}/api/preguntas/prgList`,
             {
@@ -21,6 +21,21 @@ export class QuestionService {
             
         );
         return response.json();
+    }
+      
+    async saveQuestionList (body:any, token:any){
+        const response = await this.http.post(
+            `${this.API_Consultorio}/api/calificacion/calPost`,
+            {
+              headers: {
+                Accept: "aplication/json",
+                "Content-Type": "application/json",
+                auth: token
+              },
+            },
+            { body: body }
+          );
+          return response.json();
     }
     
 }

@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import { Card, CardContent, Typography } from "@mui/material";
 import image_logistic from "../assets/images/logistica.jpg";
 
