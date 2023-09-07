@@ -1,5 +1,5 @@
 import { Box, Button, Link, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useAppDispatch } from "../app/store/hooks";
 import ImageLogisticBg from "../assets/images/logistic_bg.jpg";
 import useForm from "../hooks/useForm/useForm";
@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [items, setItems] = useState([]);
   const initialState: LoginUserInterface = {
     email: "",
     contraseña: "",
@@ -18,13 +19,11 @@ export const Login = () => {
   const sendAuthInfo = () => {
     dispatch(authUser(values)).then((res:any)=> {
       console.log(res)
-      if(res.message === "Ok"){
-        navigate("/MiCuenta")
-        navigate(0);
-      }
+      setItems(res);
+      if(res.message === "Ok")
+        navigate("/MyAccount")
+        navigate(0)
     });
-    
-
     saveSubmitForm(false);
   };
 
@@ -44,6 +43,9 @@ export const Login = () => {
         display: "flex",
       }}
     >
+    {/* {
+      items.map(item =>(<h3>{item}</h3>))
+    } */}
       <Box
         sx={{
           display: "flex",

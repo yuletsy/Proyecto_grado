@@ -4,6 +4,9 @@ import ResponsiveAppBar from './ResponsiveAppBar'
 import Footer from './Footer'
 import { useAppDispatch } from '../../app/store/hooks'
 import { RECIVE_AUTH_STATE } from '../../app/reducers/AuthReducer'
+import { RECIVE_COMPANY_STATE } from '../../app/reducers/CompanyReducer'
+import jwt_decode from "jwt-decode";
+
 export const Layout = (props:{children?:React.ReactNode}) => {
   
   const token = localStorage.getItem("token")
@@ -13,11 +16,14 @@ export const Layout = (props:{children?:React.ReactNode}) => {
   
  React.useEffect(() => {
    if(!token)return;
+   const tokenInfo: any = jwt_decode(token);
+   
    dispatch(RECIVE_AUTH_STATE({message:"ok",token }))
    
+   dispatch(RECIVE_COMPANY_STATE(tokenInfo));
+   
  }, [token, dispatch])
-  
-
+ 
   return (
 
     <React.Fragment>
