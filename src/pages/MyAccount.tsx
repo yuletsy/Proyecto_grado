@@ -4,7 +4,6 @@ import ContentAcount from "../components/ContentAccount";
 
 export const MyAccount = () => {
   
-  console.log("open my") 
   return (
    <Box>
    <ContentAcount/>

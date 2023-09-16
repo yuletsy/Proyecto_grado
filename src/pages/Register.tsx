@@ -35,7 +35,8 @@ export const Register = () => {
       navigate("/Login")
       navigate(0);
     }
-    });
+    navigate("/Register")
+      });
     saveSubmitForm(false);
   };
   const handleChangeChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -109,10 +110,10 @@ export const Register = () => {
           >
             <TextField
               sx={{ width: "100%", pb: "3%" }}
-              id="outlined-name-input"
+              id="outlined-pyme-input"
               label="Nombre de tu empresa"
               type="text"
-              autoComplete="current-name"
+              autoComplete="current-nombre"
               onChange={handleChange}
               value={values.nombre}
               name="nombre"
@@ -193,7 +194,7 @@ export const Register = () => {
               }}
             >
               ¿Ya tienes cuenta?{" "}
-              <Link
+              <Link  
                 sx={{ pt: "1%", color: "black", fontWeight: "bold" }}
                 href="/login"
                 underline="always"
