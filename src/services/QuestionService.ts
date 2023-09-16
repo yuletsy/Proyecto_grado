@@ -37,5 +37,17 @@ export class QuestionService {
           );
           return response.json();
     }
+    async resultCalification() {
+        const response = await this.http.get(
+          `${this.API_Consultorio}/api/calificacion/calGet/1`,
+          {
+            headers: {
+              Accept: "aplication/json", "Content-Type": "application/json",
+              auth : localStorage.getItem("token"), 
+            },
+          },
+        );
+        return response.json();
+      }
     
 }

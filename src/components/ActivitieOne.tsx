@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
 import { Card, CardContent, Typography } from "@mui/material";
-import image_logistic from "../assets/images/logistica.jpg";
+import image_logistic from "../assets/images/act_01.jpg";
 
 
-function CardQuestion() {
+function ActivitieOne() {
   return (
     
       <Box
@@ -12,7 +12,7 @@ function CardQuestion() {
           width: "100%",
           flexDirection: "column",
           justifyContent:"center",
-          alignItems: "center",
+          alignItems: "left",
           alignContent:"center",
           p:"2%"
         }}
@@ -91,4 +91,4 @@ function CardQuestion() {
         </Box>
   );
 }
-export default CardQuestion;
+export default ActivitieOne;

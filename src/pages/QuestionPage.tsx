@@ -1,21 +1,33 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import LinearProgress from "@mui/material/LinearProgress";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../app/store/hooks";
 import { QuestionUser, SaveQuestionUser } from "../app/actions/QuestionAction";
 import ContainerQuestion from "../components/ContentQuestion";
 import Slider from "@mui/material/Slider";
-import CardQuestion from "../components/CarrdQuestion";
 import { AplicationState } from "../interfaces/ApplicationState";
 import useForm from "../hooks/useForm/useForm";
-
+import { useNavigate } from "react-router-dom";
+import ActivitieOne from "../components/ActivitieOne";
+import ActivitieTwo from "../components/ActivitieTwo";
+import ActivitieThree from "../components/ActivitieThree";
+import ActivitieFour from "../components/ActivitieFour";
+import ActivitieFive from "../components/ActivitieFive";
+import ActivitieSix from "../components/ActivitieSix";
+import ActivitieSeven from "../components/ActivitieSeven";
+import ActivitieEight from "../components/ActivitieEigth";
+import ActivitieNine from "../components/ActivitieNine";
+import ActivitieTen from "../components/ActivitieTen";
 function valuetext(value: number) {
   return `${value}°C`;
 }
 export const Questions = () => {
   const dispatch = useAppDispatch();
-  // const navigate = useAppNavigate();
+  const navigate = useNavigate();
+  const [, setItems] = useState([]);
+  const [showButton] = React.useState(true);
+
   const questionList = useAppSelector(
     (state: AplicationState) => state.question.questionLIst
   );
@@ -30,7 +42,6 @@ export const Questions = () => {
   const token = useAppSelector((state: AplicationState) => state.auth.token);
 
   useEffect(() => {
-    console.log("se ejecuto");
     dispatch(QuestionUser());
   }, [token, dispatch]);
 
@@ -41,6 +52,10 @@ export const Questions = () => {
     const res = await dispatch(
       SaveQuestionUser(transformToObjectArray(values))
     );
+
+    console.log(res);
+    setItems(res);
+    if (res.result.success === true) navigate("/Diagnostic");
 
     saveSubmitForm(false);
   };
@@ -60,6 +75,46 @@ export const Questions = () => {
   const { values, handleChangeQuestion, handleSubmit, saveSubmitForm } =
     useForm(initialStateQuestions, saveQuestion);
 
+  const areAllRatingsComplete = () => {
+    if (!questionList) {
+      return false;
+    }
+    return questionList.every((question: any, index: number) => {
+      const rating = values[`Q${index}`]?.calificacion;
+      return rating !== undefined && rating !== 0;
+    });
+  };
+  const showCardAfter = 5;
+
+  const CardContent = [
+       <Box>
+      <ActivitieTwo />
+    </Box>,
+    <Box>
+      <ActivitieThree />
+    </Box>,
+    <Box>
+      <ActivitieFour />
+    </Box>,
+    <Box>
+      <ActivitieFive />
+    </Box>,
+    <Box>
+      <ActivitieSix />
+    </Box>,
+    <Box>
+      <ActivitieSeven />
+    </Box>,
+    <Box>
+      <ActivitieEight />
+    </Box>,
+    <Box>
+      <ActivitieNine />
+    </Box>,
+    <Box>
+      <ActivitieTen />
+    </Box>,
+  ];
   return (
     <Box
       sx={{
@@ -75,29 +130,61 @@ export const Questions = () => {
         <ContainerQuestion />
       </Box>
       <Box sx={{ pl: "4%" }}>
-        <CardQuestion />
+        <ActivitieOne />
       </Box>
 
-      <Box sx={{ pl: "6%" }}>
+      <Box sx={{ pl: "6%", pt: "3%" }}>
         {isLoading && questionList ? (
-          // <p>cargando</p>  // TODO: Añadir el progress bar
+          // TODO: Añadir el progress bar
           <Stack sx={{ width: "100%", color: "grey.500" }} spacing={2}>
-            <LinearProgress color="secondary" variant="determinate" />
+            <LinearProgress color="secondary" />
           </Stack>
         ) : (
-          <Box>
+          <Box sx={{}}>
             {questionList?.map((question: any, index: number) => (
-              <Box key={question.idPreguntas}>
-                <h3>{question.nombre}</h3>
-                <Box sx={{ width: 300 }}>
+              <Box
+                sx={{ display: "flex", flexDirection: "column" }}
+                key={question.idPreguntas}
+              >
+                <Box sx={{ display: "flex", pt: "4%", pb: "1%" }}>
+                  <Typography
+                    sx={{
+                      fontFamily: "sans-serif",
+                      fontSize: 17,
+                    }}
+                  >
+                    {question.nombre}
+                  </Typography>
+                </Box>
+
+                <Box
+                  sx={{
+                    pt: "2%",
+                    display: "flex",
+                    width: 350,
+                    alignItems: "center",
+                    pl: "5%",
+                  }}
+                >
                   <Slider
+                    sx={{
+                      color: "#fb5a73",
+                      "& .MuiSlider-valueLabel": {
+                        color: "black",
+                        backgroundColor: "transparent",
+                        pt: "0%",
+                        fontFamily: "unset",
+                        display: "flex",
+                        pl: "10%",
+                      },
+                    }}
                     aria-label="Always visible"
                     getAriaValueText={valuetext}
                     name={`Q${index}`}
-                    marks
+                    marks={false}
                     defaultValue={0}
                     value={values[`Q${index}`]?.calificacion ?? 0}
-                    valueLabelDisplay="auto"
+                    valueLabelDisplay="on"
                     min={0}
                     max={10}
                     onChange={(event, newValue) => {
@@ -112,6 +199,11 @@ export const Questions = () => {
                     }}
                   />
                 </Box>
+                <Box>
+                  {(index + 1) % showCardAfter === 0 && (
+                    <Box>{CardContent[(index + 1) / showCardAfter - 1]}</Box>
+                  )}
+                </Box>
               </Box>
             ))}
           </Box>
@@ -119,7 +211,12 @@ export const Questions = () => {
       </Box>
 
       <Box sx={{ p: "2%" }}>
-        <Button
+        {showButton && (
+          <Button
+          disabled={
+            !areAllRatingsComplete() &&
+            transformToObjectArray(values).length <= 0
+          }
           variant="contained"
           onClick={handleSubmit}
           sx={{
@@ -129,9 +226,10 @@ export const Questions = () => {
             fontFamily: "sans-serif",
             fontWeight: "bold",
           }}
-        >
-          Enviar
-        </Button>
+          >
+            Obtener Diagnostico
+          </Button>
+        )}
       </Box>
     </Box>
   );

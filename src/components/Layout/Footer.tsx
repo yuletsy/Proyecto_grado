@@ -11,7 +11,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import { useNavigate } from "react-router-dom";
 
 // const pages = ["Inicio", "Diagnostico", "Ingresa a tu cuenta"];
-const pages = [{name:"Inicio", path:"/"}, {name:"Registrate", path:"/Register"}, {name:"Inicia Sesión", path:"/Login"}];
+const pages = [{name:"Inicio", path:"/"}, {name:"Registrate", path:"/Register"}, {name:"Ingresa a tu cuenta", path:"/login"}];
 
 function Footer() {
   const navigate =  useNavigate();
@@ -38,10 +38,10 @@ function Footer() {
               justifyContent: "center",
             }}
           >
-            {pages.map((page) => (
+            {pages.map((pages) => (
               <Button
-                key={page.name}
-                onClick={()=>navigate(page.path)}
+                key={pages.name}
+                onClick={()=>navigate(pages.path)}
                 sx={{
                   my: 2,
                   color: "white",
@@ -51,9 +51,9 @@ function Footer() {
                     backgroundColor: "transparent",
                     color: "#8e8077",
                   },
-                }}
+                }}  
               >
-                {page.name}
+                {pages.name}
               </Button>
             ))}
           </Box>

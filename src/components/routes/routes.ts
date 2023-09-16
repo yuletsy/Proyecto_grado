@@ -5,7 +5,7 @@ import { PrivatePage } from "../../pages/PrivatePage";
 import {Register} from "../../pages/Register";
 import {Questions} from "../../pages/QuestionPage";
 import {Results} from "../../pages/ResultsPage";
-
+import {Diagnostic } from "../../pages/DiagnosticPage";
 const routes = [
   {
     path: "/",
@@ -35,12 +35,17 @@ const routes = [
   {
     path: "/Question",
     component: Questions,
-    isPrivated: false
+    isPrivated: true
   },
   {
     path: "/Results",
     component: Results,
     isPrivated: false
+  },
+  {
+    path: "/Diagnostic",
+    component: Diagnostic,
+    isPrivated: true
   },
   
 ];

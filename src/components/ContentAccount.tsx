@@ -2,8 +2,11 @@ import ImageLogisticBg from "../assets/images/logistic_bg.jpg";
 import { Box, Button } from "@mui/material";
 import { Card, CardContent, Typography } from "@mui/material";
 import image_logistic from "../assets/images/logistica.jpg";
+import { useNavigate } from "react-router-dom";
 
 function ContentAcount() {
+  const navigate = useNavigate();
+  
   return (
     <Box
       sx={{
@@ -106,6 +109,7 @@ function ContentAcount() {
                   <Box sx={{pt:"4%"}}>
                     <Button
                       variant="contained"
+                      onClick={() => navigate("/Diagnostic")}
                       sx={{
                         backgroundColor: "#fb5a73",
                         borderRadius: "18px",
