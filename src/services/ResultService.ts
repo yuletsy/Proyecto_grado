@@ -20,4 +20,5 @@ export class ResultService {
     );
     return response.json();
   }
+ 
 }

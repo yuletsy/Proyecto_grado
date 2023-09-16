@@ -7,7 +7,10 @@ import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import Looks3RoundedIcon from "@mui/icons-material/Looks3Rounded";
 import Looks4RoundedIcon from "@mui/icons-material/Looks4Rounded";
 import TaskRoundedIcon from "@mui/icons-material/TaskRounded";
+import { useNavigate } from "react-router-dom";
 function CardEtapas() {
+  const navigate = useNavigate();
+  
   return (
     <Box
       sx={{
@@ -168,9 +171,10 @@ function CardEtapas() {
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Button
                   variant="contained"
+                  onClick={() => navigate("/Register")}
                   sx={{
                     backgroundColor: "#fb5a73",
-                    borderRadius: "18px",
+                    borderRadisus: "18px",
                     "&:hover": { backgroundColor: "#fb7a8f" },
                     fontFamily: "sans-serif",
                   }}

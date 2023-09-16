@@ -1,4 +1,11 @@
-import { Box, Button, Link, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Link,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import { useAppDispatch } from "../app/store/hooks";
 import ImageLogisticBg from "../assets/images/logistic_bg.jpg";
@@ -10,19 +17,28 @@ import { useNavigate } from "react-router-dom";
 export const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [items, setItems] = useState([]);
+  const [, setItems] = useState([]);
   const initialState: LoginUserInterface = {
     email: "",
     contraseña: "",
   };
+  const [loading, setLoading] = useState(false);
+  const [showButton, setShowButton] = useState(true); 
 
   const sendAuthInfo = () => {
-    dispatch(authUser(values)).then((res:any)=> {
-      console.log(res)
+    setLoading(true);
+    setShowButton(false); 
+    dispatch(authUser(values)).then((res: any) => {
+      console.log(res);
       setItems(res);
-      if(res.message === "Ok")
-        navigate("/MyAccount")
-        navigate(0)
+      if (res.message === "Ok") {
+        navigate("/MyAccount");
+        navigate(0);
+      } else {
+        navigate(0);
+      }
+      setLoading(false);
+      setShowButton(true);
     });
     saveSubmitForm(false);
   };
@@ -43,9 +59,6 @@ export const Login = () => {
         display: "flex",
       }}
     >
-    {/* {
-      items.map(item =>(<h3>{item}</h3>))
-    } */}
       <Box
         sx={{
           display: "flex",
@@ -110,7 +123,7 @@ export const Login = () => {
             <TextField
               sx={{ width: "100%", pb: "3%" }}
               id="outlined-password-input"
-              label="Tu contraseña"
+              label="tu contraseña"
               type="password"
               autoComplete="current-password"
               required
@@ -120,8 +133,17 @@ export const Login = () => {
             />
           </Box>
 
-          <Box sx={{ p: "2%" }}>
+          <Box
+            sx={{
+              display: "flex",
+              p: "2%",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            { showButton && (
             <Button
+            
               variant="contained"
               onClick={handleSubmit}
               sx={{
@@ -134,6 +156,12 @@ export const Login = () => {
             >
               Iniciar sesión
             </Button>
+            )}
+            {loading && (
+              <Box sx={{p:"2%"}}>
+              <CircularProgress color="inherit"/>
+            </Box>
+            )}
           </Box>
           <Box sx={{ pt: "2%" }}>
             <Typography
@@ -152,7 +180,7 @@ export const Login = () => {
                 Registrate aquí
               </Link>
             </Typography>
-          </Box>
+          </Box> 
         </Box>
       </Box>
     </Box>

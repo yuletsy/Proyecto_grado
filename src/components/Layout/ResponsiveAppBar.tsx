@@ -9,9 +9,9 @@ import { useNavigate } from "react-router-dom";
 import { isLoginActive, logOut } from "../../middleware/auth";
 
 const pages = [
-  { name: "Inicio", path: "/" },
-  { name: "Preguntas", path: "/Question" },
-  // {name : "Resultados", path: "/Results"}
+   { name: "Inicio", path: "/" },
+  { name: "Diagnostico", path: "/Question" },
+  {name : "Resultados", path: "/Diagnostic"},
 ];
 
 function ResponsiveAppBar() {
@@ -55,7 +55,10 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0, display: "flex" }}>
-            {isLoginActive() ? (
+            {isLoginActive(
+              
+            ) ? (
+              
               <Button
                 onClick={() => logOut(navigate)}
                 variant="contained"
@@ -70,9 +73,10 @@ function ResponsiveAppBar() {
               >
                 Cerrar Sesion
               </Button>
+              
             ) : (
               <Button
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/")}
                 variant="contained"
                 sx={{
                   backgroundColor: "#fb5a73",
@@ -83,6 +87,8 @@ function ResponsiveAppBar() {
                 Ingresar
               </Button>
             )}
+            
+            
           </Box>
         </Toolbar>
       </Container>
