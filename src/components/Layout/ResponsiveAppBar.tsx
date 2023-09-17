@@ -76,7 +76,7 @@ function ResponsiveAppBar() {
               
             ) : (
               <Button
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/Login")}
                 variant="contained"
                 sx={{
                   backgroundColor: "#fb5a73",

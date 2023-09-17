@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
-import { useAppDispatch } from "../app/store/hooks";
-import { SaveCalification } from "../app/actions/ResultAction";
+import { useAppDispatch, useAppSelector } from "../app/store/hooks";
+import { GetCalificationsSumary} from "../app/actions/ResultAction";
 import ContainerDiagnostic from "../components/ContainerDiagnostic";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,22 +12,26 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import ChartDashboard from "../components/Chart/ChartComponent";
+import { AplicationState } from '../interfaces/ApplicationState';
 
 export const Diagnostic = () => {
   const dispatch = useAppDispatch();
 
+  const idEmpresa = useAppSelector((state:AplicationState)=> state.company.company.idEmpresa);
+  const token = useAppSelector((state:AplicationState)=> state.auth.token);
+
   const [results, setResult] = useState<
-    { idActividades: number; nombre: string; promedio: number }[]
+  { idActividades: number; nombre: string; promedio: number }[]
   >([]);
   
-  const token = localStorage.getItem("token");
 
   
   const data = {
-    labels: results.map((item) => item.nombre),
+    labels:  results ? results.map((item, index) => `Actividad ${index + 1}`) : [],
     datasets: [
       {
-        data: results.map((item) => item.promedio),
+        label: 'Promedio Calificaciones',
+        data: results ? results.map((item) => item.promedio): []   ,
         borderColor: "#fb7a8f",
         backgroundColor: "#fb7a8f",
       },
@@ -38,7 +42,10 @@ export const Diagnostic = () => {
     responsive: true,
     plugins: {
       legend: {
-        display: false,
+        display: true,
+        labels: {
+          color: 'rgb(255, 99, 132)'
+      }
       },
     },
   };
@@ -46,10 +53,10 @@ export const Diagnostic = () => {
 
   useEffect(() => {
     if(!token) return;
-    dispatch(SaveCalification()).then((res: any) => {
+    dispatch(GetCalificationsSumary(idEmpresa)).then((res: any) => {
       setResult(res);
     });
-  }, [token, setResult, dispatch]);
+  }, [token, idEmpresa, dispatch]);
 
   
   // let sumaTotal = 0;
@@ -111,7 +118,7 @@ export const Diagnostic = () => {
               </TableRow>
             </TableHead>
             <TableBody sx={{alignItems:"center"}}>
-              {results.map((item: any) => (
+              {results?.map((item: any) => (
                 <TableRow
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
@@ -137,7 +144,7 @@ export const Diagnostic = () => {
           </Table>
         </TableContainer>
       </Box>
-      <Box sx={{width:"100%", height:"100%"}}>
+      <Box sx={{width:"900px", height:"900px"}}>
       <ChartDashboard data={data} options={options} />
       </Box>
     </Box>

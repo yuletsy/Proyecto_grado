@@ -37,13 +37,14 @@ export class QuestionService {
           );
           return response.json();
     }
-    async resultCalification() {
+
+    async resultCalification(token:string, idEmpresa:string) {
         const response = await this.http.get(
-          `${this.API_Consultorio}/api/calificacion/calGet/1`,
+          `${this.API_Consultorio}/api/calificacion/calGet/${idEmpresa}`,
           {
             headers: {
               Accept: "aplication/json", "Content-Type": "application/json",
-              auth : localStorage.getItem("token"), 
+              auth : token, 
             },
           },
         );

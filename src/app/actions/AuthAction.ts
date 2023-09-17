@@ -22,12 +22,6 @@ export const authUser = (body: LoginUserInterface) => {
       }
       localStorage.setItem("token", res.token);
 
-      Swal.fire({
-        icon: "success",
-        title: "Usuario logeado",
-        text: `Usuario logeado`,
-      });
-
       dispatch(RECIVE_AUTH_STATE(res));
       return res;
     } catch (error) {}
