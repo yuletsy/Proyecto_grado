@@ -4,13 +4,11 @@ import LinearProgress from "@mui/material/LinearProgress";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../app/store/hooks";
 import { QuestionUser, SaveQuestionUser } from "../app/actions/QuestionAction";
-import ContainerQuestion from "../components/ContentQuestion";
+import ContainerQuestion from "../components/Result/ContentQuestion";
 import Slider from "@mui/material/Slider";
 import { AplicationState } from "../interfaces/ApplicationState";
 import useForm from "../hooks/useForm/useForm";
 import { useNavigate } from "react-router-dom";
-import ActivitieOne from "../components/ActivitieOne";
-import ActivitieTwo from "../components/ActivitieTwo";
 import ActivitieThree from "../components/ActivitieThree";
 import ActivitieFour from "../components/ActivitieFour";
 import ActivitieFive from "../components/ActivitieFive";
@@ -19,6 +17,11 @@ import ActivitieSeven from "../components/ActivitieSeven";
 import ActivitieEight from "../components/ActivitieEigth";
 import ActivitieNine from "../components/ActivitieNine";
 import ActivitieTen from "../components/ActivitieTen";
+import ActivitiesCard from "../components/Diagnostic/Cards/ActivitiesCard";
+
+import image_logistic from "../assets/images/act_01.jpg";
+import image_logistic_two from "../assets/images/act_02.jpg";
+
 function valuetext(value: number) {
   return `${value}°C`;
 }
@@ -75,20 +78,15 @@ export const Questions = () => {
   const { values, handleChangeQuestion, handleSubmit, saveSubmitForm } =
     useForm(initialStateQuestions, saveQuestion);
 
-  const areAllRatingsComplete = () => {
-    if (!questionList) {
-      return false;
-    }
-    return questionList.every((question: any, index: number) => {
-      const rating = values[`Q${index}`]?.calificacion;
-      return rating !== undefined && rating !== 0;
-    });
-  };
   const showCardAfter = 5;
 
   const CardContent = [
-       <Box>
-      <ActivitieTwo />
+    <Box>
+      <ActivitiesCard
+        srcImage={image_logistic_two}
+        title="Sistemas de separación, alistamiento y despacho"
+        description="Responde cada enunciado para calificar los riesgos logísticos en tus sistemas de separación, alistamiento y despacho"
+      />
     </Box>,
     <Box>
       <ActivitieThree />
@@ -130,7 +128,11 @@ export const Questions = () => {
         <ContainerQuestion />
       </Box>
       <Box sx={{ pl: "4%" }}>
-        <ActivitieOne />
+        <ActivitiesCard
+          srcImage={image_logistic}
+          title="Sistemas de recibo y almacenamiento"
+          description=" Responde cada enunciado para calificar los riesgos logísticos en tus sistemas de recibo y almacenamiento"
+        />
       </Box>
 
       <Box sx={{ pl: "6%", pt: "3%" }}>
@@ -213,19 +215,16 @@ export const Questions = () => {
       <Box sx={{ p: "2%" }}>
         {showButton && (
           <Button
-          disabled={
-            !areAllRatingsComplete() &&
-            transformToObjectArray(values).length <= 0
-          }
-          variant="contained"
-          onClick={handleSubmit}
-          sx={{
-            backgroundColor: "#fb5a73",
-            borderRadius: "18px",
-            "&:hover": { backgroundColor: "#fb7a8f" },
-            fontFamily: "sans-serif",
-            fontWeight: "bold",
-          }}
+            disabled={transformToObjectArray(values).length < 51}
+            variant="contained"
+            onClick={handleSubmit}
+            sx={{
+              backgroundColor: "#fb5a73",
+              borderRadius: "18px",
+              "&:hover": { backgroundColor: "#fb7a8f" },
+              fontFamily: "sans-serif",
+              fontWeight: "bold",
+            }}
           >
             Obtener Diagnostico
           </Button>
