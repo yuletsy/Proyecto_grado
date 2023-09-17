@@ -34,8 +34,7 @@ export const SaveQuestionUser = (body: any) => {
         });
         return res;
       }
-      localStorage.setItem("token", res.result.token);
-      
+
       Swal.fire({
         icon: "success",
         title: "Haz calificado todas las preguntas, gracias!",

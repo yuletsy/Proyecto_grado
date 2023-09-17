@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { useAppDispatch } from "../app/store/hooks";
-import { ResultUser, SaveCalification } from "../app/actions/ResultAction";
+import { SaveCalification } from "../app/actions/ResultAction";
 import ContainerDiagnostic from "../components/ContainerDiagnostic";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,6 +11,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
+import ChartDashboard from "../components/Chart/ChartComponent";
 
 export const Diagnostic = () => {
   const dispatch = useAppDispatch();
@@ -21,17 +22,35 @@ export const Diagnostic = () => {
   
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    dispatch(ResultUser()).then((res: any) => {
-      setResult(res);
-    });
-  }, [token, setResult, dispatch]);
+  
+  const data = {
+    labels: results.map((item) => item.nombre),
+    datasets: [
+      {
+        data: results.map((item) => item.promedio),
+        borderColor: "#fb7a8f",
+        backgroundColor: "#fb7a8f",
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
+
 
   useEffect(() => {
+    if(!token) return;
     dispatch(SaveCalification()).then((res: any) => {
       setResult(res);
     });
   }, [token, setResult, dispatch]);
+
   
   // let sumaTotal = 0;
 
@@ -117,6 +136,9 @@ export const Diagnostic = () => {
             </TableBody>
           </Table>
         </TableContainer>
+      </Box>
+      <Box sx={{width:"100%", height:"100%"}}>
+      <ChartDashboard data={data} options={options} />
       </Box>
     </Box>
   );

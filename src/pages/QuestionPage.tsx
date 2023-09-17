@@ -74,16 +74,7 @@ export const Questions = () => {
 
   const { values, handleChangeQuestion, handleSubmit, saveSubmitForm } =
     useForm(initialStateQuestions, saveQuestion);
-
-  const areAllRatingsComplete = () => {
-    if (!questionList) {
-      return false;
-    }
-    return questionList.every((question: any, index: number) => {
-      const rating = values[`Q${index}`]?.calificacion;
-      return rating !== undefined && rating !== 0;
-    });
-  };
+    
   const showCardAfter = 5;
 
   const CardContent = [
@@ -213,10 +204,7 @@ export const Questions = () => {
       <Box sx={{ p: "2%" }}>
         {showButton && (
           <Button
-          disabled={
-            !areAllRatingsComplete() &&
-            transformToObjectArray(values).length <= 0
-          }
+          disabled={transformToObjectArray(values).length < 51}
           variant="contained"
           onClick={handleSubmit}
           sx={{
