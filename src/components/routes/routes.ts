@@ -1,30 +1,29 @@
-import { Home } from "../../pages/Home";
-import { Login} from "../../pages/Login";
-import { MyAccount } from "../../pages/MyAccount";
+import { HomePage } from "../../pages/Home";
+import { LoginPage} from "../../pages/LoginPage";
+import { MyAccountPage } from "../../pages/MyAccountPage";
 import { PrivatePage } from "../../pages/PrivatePage";
-import {Register} from "../../pages/Register";
-import {Questions} from "../../pages/QuestionPage";
-import {Results} from "../../pages/ResultsPage";
-import {Diagnostic } from "../../pages/DiagnosticPage";
+import {RegisterPage} from "../../pages/RegisterPage";
+import {QuestionPage} from "../../pages/QuestionPage";
+import {DiagnosticPage } from "../../pages/DiagnosticPage";
 const routes = [
   {
     path: "/",
-    component: Home,
+    component: HomePage,
     isPrivated:false
   },
   {
     path: "/Login",
-    component: Login,
+    component: LoginPage,
     isPrivated:false
   },
   {
     path: "/Register",
-    component: Register,
+    component: RegisterPage,
     isPrivated:false
   },
   {
     path: "/MyAccount",
-    component: MyAccount,
+    component: MyAccountPage,
     isPrivated:true
   },
   {
@@ -34,17 +33,13 @@ const routes = [
   },
   {
     path: "/Question",
-    component: Questions,
+    component: QuestionPage,
     isPrivated: true
   },
+
   {
     path: "/Results",
-    component: Results,
-    isPrivated: false
-  },
-  {
-    path: "/Diagnostic",
-    component: Diagnostic,
+    component: DiagnosticPage,
     isPrivated: true
   },
   

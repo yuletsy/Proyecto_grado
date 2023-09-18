@@ -14,7 +14,7 @@ import { LoginUserInterface } from "../interfaces/LoginUserInterface";
 import { authUser } from "../app/actions/AuthAction";
 import { useNavigate } from "react-router-dom";
 
-export const Login = () => {
+export const LoginPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [, setItems] = useState([]);

@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
-import image_logistic from "../assets/images/logistica.jpg";
+import image_logistic from "../../assets/images/logistica.jpg";
 import { useNavigate } from "react-router-dom";
 function Main() {
   const navigate = useNavigate();

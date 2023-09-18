@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../app/store/hooks";
 import { GetCalificationsSumary} from "../app/actions/ResultAction";
-import ContainerDiagnostic from "../components/ContainerDiagnostic";
+import ContainerDiagnostic from "../components/Diagnostic/ContainerDiagnostic";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -14,7 +14,7 @@ import { Typography } from "@mui/material";
 import ChartDashboard from "../components/Chart/ChartComponent";
 import { AplicationState } from '../interfaces/ApplicationState';
 
-export const Diagnostic = () => {
+export const DiagnosticPage = () => {
   const dispatch = useAppDispatch();
 
   const idEmpresa = useAppSelector((state:AplicationState)=> state.company.company.idEmpresa);

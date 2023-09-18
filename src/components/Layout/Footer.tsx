@@ -7,14 +7,24 @@ import logo from "../../assets/images/logo.png";
 import SmartDisplayRoundedIcon from "@mui/icons-material/SmartDisplayRounded";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import Divider from "@mui/material/Divider";
-import TwitterIcon from '@mui/icons-material/Twitter';
+import TwitterIcon from "@mui/icons-material/Twitter";
 import { useNavigate } from "react-router-dom";
+import { isLoginActive } from "../../middleware/auth";
 
 // const pages = ["Inicio", "Diagnostico", "Ingresa a tu cuenta"];
-const pages = [{name:"Inicio", path:"/"}, {name:"Registrate", path:"/Register"}, {name:"Ingresa a tu cuenta", path:"/login"}];
+const pages = [
+  { name: "Inicio", path: "/" },
+  { name: "Diagnostico", path: "/Question" },
+
+  
+];
+const page = [
+  { name: "Ingresa a tu cuenta", path: "/login" },
+  { name: "Registrate", path: "/Register" },
+]
 
 function Footer() {
-  const navigate =  useNavigate();
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -22,7 +32,7 @@ function Footer() {
         paddingTop: "1rem",
         display: "flex",
         bgcolor: "#69a2b0",
-        pb:"2%",
+        pb: "2%",
         bottom: 0,
       }}
     >
@@ -38,10 +48,28 @@ function Footer() {
               justifyContent: "center",
             }}
           >
-            {pages.map((pages) => (
+            {isLoginActive() ? (
+              pages.map((pages) => (
+                <Button
+                  key={pages.name}
+                  onClick={() => navigate(pages.path)}
+                  sx={{
+                    my: 2,
+                    color: "white",
+                    display: "block",
+                    fontWeight: "bold",
+                    "&:hover": {
+                      backgroundColor: "transparent",
+                      color: "#8e8077",
+                    },
+                  }}
+                >
+                  {pages.name}
+                </Button>
+              ))) : ( 
+              page.map((page) => (
               <Button
-                key={pages.name}
-                onClick={()=>navigate(pages.path)}
+                onClick={() => navigate(page.path)}
                 sx={{
                   my: 2,
                   color: "white",
@@ -51,11 +79,11 @@ function Footer() {
                     backgroundColor: "transparent",
                     color: "#8e8077",
                   },
-                }}  
+                }}
               >
-                {pages.name}
+                {page.name}
               </Button>
-            ))}
+            )))}
           </Box>
         </Toolbar>
         <Divider variant="middle" sx={{ bgcolor: "white", width: "100%" }} />

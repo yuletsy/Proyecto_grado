@@ -1,11 +1,11 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import ResponsiveAppBar from './ResponsiveAppBar'
 import Footer from './Footer'
 import { useAppDispatch } from '../../app/store/hooks'
 import { RECIVE_AUTH_STATE } from '../../app/reducers/AuthReducer'
 import { RECIVE_COMPANY_STATE } from '../../app/reducers/CompanyReducer'
 import jwt_decode from "jwt-decode";
+import AppBarPublic from './AppBarPublic'
 
 export const Layout = (props:{children?:React.ReactNode}) => {
   
@@ -26,7 +26,7 @@ export const Layout = (props:{children?:React.ReactNode}) => {
 
     <React.Fragment>
     <Box sx={{display:'flex'}}>
-    <Box><ResponsiveAppBar/></Box>
+    <Box><AppBarPublic/></Box>
     <Box component='main' sx={{flexGrow:1, pt:"2%"}}>{props.children}</Box>
     </Box>
     <Box sx={{display: "flex"}} >

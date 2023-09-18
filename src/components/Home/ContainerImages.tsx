@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import image_logistic from "../assets/images/logistica.jpg";
-import image_ctrl from "../assets/images/ctrl_inventario.jpg";
+import image_logistic from "../../assets/images/logistica.jpg";
+import image_ctrl from "../../assets/images/ctrl_inventario.jpg";
 
 function ContainerImages() {
   return (

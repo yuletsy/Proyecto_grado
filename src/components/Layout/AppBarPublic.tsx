@@ -11,10 +11,10 @@ import { isLoginActive, logOut } from "../../middleware/auth";
 const pages = [
    { name: "Inicio", path: "/" },
   { name: "Diagnostico", path: "/Question" },
-  {name : "Resultados", path: "/Diagnostic"},
+  {name : "Resultados", path: "/Results"},
 ];
 
-function ResponsiveAppBar() {
+function AppBarPublic() {
   const navigate = useNavigate();
   return (
     <AppBar position="fixed" sx={{ bgcolor: "white" }}>
@@ -95,4 +95,4 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+export default AppBarPublic;

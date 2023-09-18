@@ -4,7 +4,7 @@ import React from "react";
 import { isLoginActive } from "../middleware/auth";
 import { useNavigate } from "react-router-dom";
 
-export const MyAccount = () => {
+export const MyAccountPage = () => {
 
   const navigate = useNavigate();
 

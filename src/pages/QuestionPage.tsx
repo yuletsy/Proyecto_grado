@@ -9,28 +9,30 @@ import Slider from "@mui/material/Slider";
 import { AplicationState } from "../interfaces/ApplicationState";
 import useForm from "../hooks/useForm/useForm";
 import { useNavigate } from "react-router-dom";
-import ActivitieThree from "../components/ActivitieThree";
-import ActivitieFour from "../components/ActivitieFour";
-import ActivitieFive from "../components/ActivitieFive";
-import ActivitieSix from "../components/ActivitieSix";
-import ActivitieSeven from "../components/ActivitieSeven";
-import ActivitieEight from "../components/ActivitieEigth";
-import ActivitieNine from "../components/ActivitieNine";
-import ActivitieTen from "../components/ActivitieTen";
+
 import ActivitiesCard from "../components/Diagnostic/Cards/ActivitiesCard";
 
 import image_logistic from "../assets/images/act_01.jpg";
 import image_logistic_two from "../assets/images/act_02.jpg";
+import image_logistic_three from "../assets/images/act_03.jpg";
+import image_logistic_four from "../assets/images/act_04.jpg";
+import image_logistic_five from "../assets/images/act_05.jpg";
+import image_logistic_six from "../assets/images/act_06.jpg";
+import image_logistic_seven from "../assets/images/act_07.jpg";
+import image_logistic_eigth from "../assets/images/act_08.jpg";
+import image_logistic_nine from "../assets/images/act_09.jpg";
+import image_logistic_ten from "../assets/images/act_10.jpg";
+
+import { isLoginActive } from "../middleware/auth";
 
 function valuetext(value: number) {
   return `${value}°C`;
 }
-export const Questions = () => {
+export const QuestionPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [, setItems] = useState([]);
   const [showButton] = React.useState(true);
-
   const questionList = useAppSelector(
     (state: AplicationState) => state.question.questionLIst
   );
@@ -48,6 +50,12 @@ export const Questions = () => {
     dispatch(QuestionUser());
   }, [token, dispatch]);
 
+  React.useEffect(() => {
+    if (!isLoginActive()) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
   const initialStateQuestions: Record<string, any> = {};
 
   const saveQuestion = async () => {
@@ -58,7 +66,8 @@ export const Questions = () => {
 
     console.log(res);
     setItems(res);
-    if (res.result.success === true) navigate("/Diagnostic");
+    if (res.result.success === true ) {
+      navigate("/Results")};
 
     saveSubmitForm(false);
   };
@@ -89,28 +98,62 @@ export const Questions = () => {
       />
     </Box>,
     <Box>
-      <ActivitieThree />
+      <ActivitiesCard
+        srcImage={image_logistic_three}
+        title="Equipos de manejo de materiales y medios de almacenamiento"
+        description="Responde cada enunciado para calificar los riesgos logísticos en tus equipos de manejo de materiales y medios de almacenamiento"
+      />
     </Box>,
     <Box>
-      <ActivitieFour />
+      <ActivitiesCard
+        srcImage={image_logistic_four}
+        title="Distribución física y layout"
+        description="Responde cada enunciado para calificar los riesgos logísticos en tu distribución física y layout "
+      />
     </Box>,
     <Box>
-      <ActivitieFive />
+      <ActivitiesCard
+        srcImage={image_logistic_five}
+        title="Gestión de inventarios"
+        description="Responde cada enunciado para calificar los riesgos logísticos en tu gestión de inventarias
+         "
+      />
     </Box>,
     <Box>
-      <ActivitieSix />
+      <ActivitiesCard
+        srcImage={image_logistic_six}
+        title="Indicadores de gestión"
+        description=" Responde cada enunciado para calificar los riesgos logísticos en tus indicadores de gestión "
+      />
     </Box>,
     <Box>
-      <ActivitieSeven />
+      <ActivitiesCard
+        srcImage={image_logistic_seven}
+        title="Sistemas de seguridad y salud ocupacional"
+        description=" Responde cada enunciado para calificar los riesgos logísticos en tus sistemas de seguridad y salud ocupacional "
+      />
     </Box>,
     <Box>
-      <ActivitieEight />
+      <ActivitiesCard
+        srcImage={image_logistic_eigth}
+        title="  Sistemas de aseguramiento de calidad"
+        description=" Responde cada enunciado para calificar los riesgos logísticos en tus sistemas de aseguramiento de calidad "
+      />
     </Box>,
     <Box>
-      <ActivitieNine />
+      <ActivitiesCard
+        srcImage={image_logistic_nine}
+        title="Recurso humano"
+        description="  Responde cada enunciado para calificar los riesgos logísticos en el recurso humano de tu empresa
+        "
+      />
     </Box>,
     <Box>
-      <ActivitieTen />
+      <ActivitiesCard
+        srcImage={image_logistic_ten}
+        title="Sistemas de información y tecnologías de apoyo"
+        description=" Responde cada enunciado para calificar los riesgos logísticos en tus sistemas de información y tecnologías de apoyo  "
+      />
     </Box>,
   ];
   return (
@@ -213,7 +256,7 @@ export const Questions = () => {
       </Box>
 
       <Box sx={{ p: "2%" }}>
-        {showButton && (
+        {showButton &&  (
           <Button
             disabled={transformToObjectArray(values).length < 51}
             variant="contained"

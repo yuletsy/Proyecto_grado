@@ -14,7 +14,7 @@ import { RegisterUserInterface } from "../interfaces/RegisterUserInterface";
 import { authRegister } from "../app/actions/RegisterAction";
 import useForm from "../hooks/useForm/useForm";
 
-export const Register = () => {
+export const RegisterPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isDisabled, setDisabled] = React.useState(false);

@@ -1,12 +1,12 @@
 import { Box } from "@mui/material";
 import React from "react";
-import CardEtapas from "../components/CardEtapas";
-import ContainerCard from "../components/ContainerCard";
-import ContainerImages from "../components/ContainerImages";
-import InfoFooter from "../components/InfoFooter";
-import Main from "../components/Main";
+import CardEtapas from "../components/Home/CardEtapas";
+import ContainerCard from "../components/Home/ContainerCard";
+import ContainerImages from "../components/Home/ContainerImages";
+import InfoFooter from "../components/Footer/InfoFooter";
+import Main from "../components/Home/Main";
 
-export const Home = () => {
+export const HomePage = () => {
   return (
     <Box
       sx={{

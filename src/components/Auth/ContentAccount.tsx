@@ -109,7 +109,7 @@ function ContentAcount() {
                   <Box sx={{pt:"4%"}}>
                     <Button
                       variant="contained"
-                      onClick={() => navigate("/Diagnostic")}
+                      onClick={() => navigate("/Results")}
                       sx={{
                         backgroundColor: "#fb5a73",
                         borderRadius: "18px",
