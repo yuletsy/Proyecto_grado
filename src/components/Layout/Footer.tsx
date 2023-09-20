@@ -11,20 +11,21 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import { useNavigate } from "react-router-dom";
 import { isLoginActive } from "../../middleware/auth";
 
-// const pages = ["Inicio", "Diagnostico", "Ingresa a tu cuenta"];
-const pages = [
+const pagesPublic = [
   { name: "Inicio", path: "/" },
   { name: "Diagnostico", path: "/Question" },
-
-  
 ];
-const page = [
+
+const pagesPrivates = [
+  ...pagesPublic,
   { name: "Ingresa a tu cuenta", path: "/login" },
   { name: "Registrate", path: "/Register" },
-]
+];
+
 
 function Footer() {
   const navigate = useNavigate();
+  const pages = isLoginActive() ? pagesPublic : pagesPrivates;
   return (
     <Box
       sx={{
@@ -48,27 +49,9 @@ function Footer() {
               justifyContent: "center",
             }}
           >
-            {isLoginActive() ? (
-              pages.map((pages) => (
-                <Button
-                  key={pages.name}
-                  onClick={() => navigate(pages.path)}
-                  sx={{
-                    my: 2,
-                    color: "white",
-                    display: "block",
-                    fontWeight: "bold",
-                    "&:hover": {
-                      backgroundColor: "transparent",
-                      color: "#8e8077",
-                    },
-                  }}
-                >
-                  {pages.name}
-                </Button>
-              ))) : ( 
-              page.map((page) => (
+           {pages.map((page) => (
               <Button
+                key={page.name}
                 onClick={() => navigate(page.path)}
                 sx={{
                   my: 2,
@@ -83,7 +66,8 @@ function Footer() {
               >
                 {page.name}
               </Button>
-            )))}
+            ))}
+              
           </Box>
         </Toolbar>
         <Divider variant="middle" sx={{ bgcolor: "white", width: "100%" }} />

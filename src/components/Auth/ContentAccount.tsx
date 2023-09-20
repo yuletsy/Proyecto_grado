@@ -195,7 +195,7 @@ function ContentAcount() {
                         fontFamily: "sans-serif",
                       }}
                     >
-                      Ver resultados
+                      Ver recursos
                     </Button>
                   </Box>
                   </Box>
@@ -273,7 +273,7 @@ function ContentAcount() {
                         fontFamily: "sans-serif",
                       }}
                     >
-                      Ver resultados
+                      Ver capacitaciones
                     </Button>
                   </Box>
                   </Box>

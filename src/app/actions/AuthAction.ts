@@ -20,6 +20,7 @@ export const authUser = (body: LoginUserInterface) => {
 
         return res;
       }
+      
       localStorage.setItem("token", res.token);
 
       dispatch(RECIVE_AUTH_STATE(res));

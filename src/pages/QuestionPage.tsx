@@ -24,6 +24,7 @@ import image_logistic_nine from "../assets/images/act_09.jpg";
 import image_logistic_ten from "../assets/images/act_10.jpg";
 
 import { isLoginActive } from "../middleware/auth";
+import { GetCountSummary } from "../app/actions/ResultAction";
 
 function valuetext(value: number) {
   return `${value}°C`;
@@ -33,6 +34,7 @@ export const QuestionPage = () => {
   const navigate = useNavigate();
   const [, setItems] = useState([]);
   const [showButton] = React.useState(true);
+  
   const questionList = useAppSelector(
     (state: AplicationState) => state.question.questionLIst
   );
@@ -43,9 +45,11 @@ export const QuestionPage = () => {
   const companyId = useAppSelector(
     (state: AplicationState) => state.company.company
   );
+  const idEmpresa = useAppSelector((state:AplicationState)=> state.company.company.idEmpresa);
 
   const token = useAppSelector((state: AplicationState) => state.auth.token);
 
+  
   useEffect(() => {
     dispatch(QuestionUser());
   }, [token, dispatch]);
@@ -55,6 +59,13 @@ export const QuestionPage = () => {
       navigate("/login");
     }
   }, [navigate]);
+  
+  // useEffect(() => {
+  //   if(!token) return;
+  //   dispatch(GetCountSummary(idEmpresa)).then((res: any) => {
+  //     setResult(res);
+  //   });
+  // }, [token, idEmpresa, dispatch]);
 
   const initialStateQuestions: Record<string, any> = {};
 
@@ -66,12 +77,13 @@ export const QuestionPage = () => {
 
     console.log(res);
     setItems(res);
-    if (res.result.success === true ) {
-      navigate("/Results")};
+    if (res.result.success === true) {
+      navigate("/Results");
+    }
 
     saveSubmitForm(false);
   };
-
+ 
   function transformToObjectArray(inputObj: any) {
     const resultArray = [];
 
@@ -115,8 +127,7 @@ export const QuestionPage = () => {
       <ActivitiesCard
         srcImage={image_logistic_five}
         title="Gestión de inventarios"
-        description="Responde cada enunciado para calificar los riesgos logísticos en tu gestión de inventarias
-         "
+        description="Responde cada enunciado para calificar los riesgos logísticos en tu gestión de inventarias"
       />
     </Box>,
     <Box>
@@ -255,8 +266,8 @@ export const QuestionPage = () => {
         )}
       </Box>
 
-      <Box sx={{ p: "2%" }}>
-        {showButton &&  (
+      <Box sx={{ pt: "2%", alignItems: "center" }}>
+        {showButton && (
           <Button
             disabled={transformToObjectArray(values).length < 51}
             variant="contained"
@@ -272,6 +283,26 @@ export const QuestionPage = () => {
             Obtener Diagnostico
           </Button>
         )}
+      </Box>
+      <Box
+        sx={{
+          display:"flex",
+          justifyContent:"center",
+          width: "100%",
+          pt: "0.5%",
+          pb:"2%"
+        }}
+      >
+        <Typography
+          sx={{
+            fontFamily: "",
+            fontSize: 14,
+            fontWeight:"normal",
+            opacity:"0.6"
+          }}
+        >
+          Califica todas las preguntas para obtener el diagnostico
+        </Typography>
       </Box>
     </Box>
   );

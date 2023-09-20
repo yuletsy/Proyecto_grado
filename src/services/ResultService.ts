@@ -8,13 +8,13 @@ export class ResultService {
     this.API_Consultorio = "https://consultoriounac.azurewebsites.net";
   }
 
-  async resultAuth() {
+  async resultAuth(token:string) {
     const response = await this.http.get(
       `${this.API_Consultorio}/api/actividades/actList`,
       {
         headers: {
           Accept: "aplication/json", "Content-Type": "application/json",
-          auth : localStorage.getItem("token"), 
+          auth : token, 
         },
       },
     );

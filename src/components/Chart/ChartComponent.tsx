@@ -10,7 +10,7 @@ import { Line } from 'react-chartjs-2'
 
  const ChartDashboard = ({data , options}:ChartDashboardProps) => {
   return (
-        <Line options={options} data={data} width={"100%"} height={"30%"}/>
+        <Line options={options} data={data} width={"100%"} height={"50%"}/>
   )
 }
 

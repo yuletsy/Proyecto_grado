@@ -4,7 +4,7 @@ import { MyAccountPage } from "../../pages/MyAccountPage";
 import { PrivatePage } from "../../pages/PrivatePage";
 import {RegisterPage} from "../../pages/RegisterPage";
 import {QuestionPage} from "../../pages/QuestionPage";
-import {DiagnosticPage } from "../../pages/DiagnosticPage";
+import {ResultsPage } from "../../pages/ResultsPage";
 const routes = [
   {
     path: "/",
@@ -39,7 +39,7 @@ const routes = [
 
   {
     path: "/Results",
-    component: DiagnosticPage,
+    component: ResultsPage,
     isPrivated: true
   },
   

@@ -5,10 +5,15 @@ import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import logo from "../../assets/images/logo.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,useLocation} from "react-router-dom";
 import { isLoginActive, logOut } from "../../middleware/auth";
 
-const pages = [
+type Page = {
+  name: string;
+  path: string;
+};
+
+const pages: Page[]= [
    { name: "Inicio", path: "/" },
   { name: "Diagnostico", path: "/Question" },
   {name : "Resultados", path: "/Results"},
@@ -16,6 +21,20 @@ const pages = [
 
 function AppBarPublic() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [activeButton, setActiveButton] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    // Actualiza el botón activo cuando cambia la ubicación (ruta)
+    const activePage = pages.find((page) => page.path === location.pathname);
+    setActiveButton(activePage ? activePage.name : null);
+  }, [location]);
+  
+  const handleButtonClick = (page: Page) => {
+    setActiveButton(page.name);
+    navigate(page.path);
+  };
+
   return (
     <AppBar position="fixed" sx={{ bgcolor: "white" }}>
       <Container maxWidth="xl">
@@ -37,10 +56,10 @@ function AppBarPublic() {
               pages.map((page) => (
                 <Button
                   key={page.name}
-                  onClick={() => navigate(page.path)}
+                  onClick={() => handleButtonClick(page)}
                   sx={{
                     my: 2,
-                    color: "#6F6F6F",
+                    color: activeButton === page.name ? "#fb7a8f" : "#6F6F6F",
                     display: "block",
                     fontWeight: "bold",
                     "&:hover": {
@@ -48,6 +67,7 @@ function AppBarPublic() {
                       color: "#fb7a8f",
                     },
                   }}
+                  disabled={activeButton === page.name}
                 >
                   {page.name}
                 </Button>

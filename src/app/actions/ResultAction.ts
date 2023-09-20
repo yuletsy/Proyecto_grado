@@ -26,3 +26,26 @@ export const GetCalificationsSumary = (idEmpresa:string) => {
     } catch (error) {}
   };
 };
+  export const GetCountSummary = (idEmpresa:string) => {
+    return async (dispatch: Dispatch<any>, getState: any) => {
+      try {
+        const state = getState();
+        const httpClient = new HttpClient();
+        const questionService = new QuestionService(httpClient);
+        const res = await questionService.GetCount(state.token, idEmpresa);
+        
+        if (res.ok === true) {
+          Swal.fire({
+            icon: "success",
+            title: "ya puedes  ver el diagnostico",
+            text: `${res.count}`,
+          });
+  
+          return res;
+        }
+  
+        return res;
+      } catch (error) {}
+    };
+  };
+

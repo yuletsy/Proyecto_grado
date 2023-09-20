@@ -2,7 +2,6 @@ import { Dispatch } from "@reduxjs/toolkit";
 import Swal from "sweetalert2";
 import { HttpClient } from "../../services/HttpClient";
 import { QuestionService } from "../../services/QuestionService";
-// import { RECIVE_COMPANY_STATE } from "../reducers/CompanyReducer";
 import { RECIVE_QUESTION_LIST_STATE } from "../reducers/QuestionReducer";
 
 export const QuestionUser = () => {

@@ -98,4 +98,4 @@ const ActivitiesCard = ({srcImage, title, description}:CardInfo) => {
   )
 }
 
-export default ActivitiesCard
+export default ActivitiesCard;
